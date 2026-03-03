@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signin</title>
+
+    <style>
+        body {
+            background: #1e1e1e;
+            font-family: Arial, sans-serif;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #2b2b2b;
+            padding: 30px;
+            width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.06);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Attractive input boxes */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #555;
+            background: #333;
+            color: white;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        /* Glow effect on focus */
+        input:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 8px rgba(0,255,136,0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #555;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #777;
+        }
+
+        #otpDisplay {
+            text-align: center;
+            font-size: 16px;
+            color: #00d400;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .msg {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* OTP field hidden initially */
+        #otpSection {
+            display: none;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Signin</h2>
+
+    <!-- Error Message -->
+    <p th:text="${msg}" class="msg"></p>
+
+    <form th:action="@{/signinOtp}" method="post">
+
+        <label>Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label>Mobile:</label>
+        <input type="text" id="mobile" name="mobile" required>
+
+        <button type="button" onclick="getOtp()">Get OTP</button>
+
+        <p id="otpDisplay"></p>
+
+        <!-- OTP Section (Hidden initially) -->
+        <div id="otpSection">
+            <label>Enter OTP:</label>
+            <input type="text" name="otp" required>
+            <button type="submit">Signin</button>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+    function getOtp() {
+        let username = document.getElementById("username").value;
+        let mobile = document.getElementById("mobile").value;
+
+        fetch(`/getOtp?username=${username}&mobile=${mobile}`)
+            .then(resp => resp.text())
+            .then(data => {
+                document.getElementById("otpDisplay").innerHTML =
+                    "Generated OTP: <b>" + data + "</b>";
+
+                // Show OTP field
+                document.getElementById("otpSection").style.display = "block";
+            });
+    }
+</script>
+
+</body>
+</html>

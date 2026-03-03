@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/DM2Cart
+    username: postgres
+    password: "root"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+
+jwt:
+  secret: "replace-with-very-long-secret-from-secrets-manager"
+  expiration-ms: 900000   # 15 minutes
+  refresh-expiration-ms: 1209600000 # 14 days
+
+app:
+  otp:
+    ttl-seconds: 300  # 5 minutes
+    max-requests-per-hour: 5
+  mail:
+    from: sunnysharma.org1@gmail.com
+    # configure SMTP provider credentials via env or secrets manager

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Signin</title>
+
+    <style>
+        body {
+            background: #1e1e1e;
+            font-family: Arial, sans-serif;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #2a2a2a;
+            padding: 30px;
+            width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.07);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            background: #333;
+            color: white;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #00ffa5;
+            box-shadow: 0 0 8px rgba(0,255,150,0.5);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #666;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Login</h2>
+
+    <!-- FORM that sends mobile + password as @RequestParam -->
+    <form action="/signin" method="post">
+
+        <label>Mobile Number:</label><br>
+        <input type="text" name="mobile" placeholder="Enter mobile number" required>
+        <br><br>
+
+        <label>Password:</label><br>
+        <input  id="ps" type="password" name="password" placeholder="Enter password" required>
+        <br><br>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <!-- Text message (still visible) -->
+    <p style="color:red;">[[${msg}]]</p>
+
+</div>
+
+<!-- POPUP ALERT IF MESSAGE EXISTS -->
+<script>
+    window.onload = function() {
+        let pas=document.getElementById("ps").value;
+        let message = "[[${msg}]]";
+        if (message && message.trim() !== "") {
+            alert(pas); // show popup alert
+        }
+    };
+</script>
+
+</body>
+</html>

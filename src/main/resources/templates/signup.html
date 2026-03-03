@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signup</title>
+
+    <style>
+        body {
+            background: #1e1e1e;
+            font-family: Arial, sans-serif;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #2a2a2a;
+            width: 380px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.06);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            background: #333;
+            color: white;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #00ffa5;
+            box-shadow: 0 0 8px rgba(0,255,150,0.4);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #666;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Signup</h2>
+
+    <form th:action="@{/signup}" method="post">
+
+        <label>Username:</label>
+        <input type="text" name="username" required/>
+
+        <label>Mobile:</label>
+        <input type="text" name="mobile" required/>
+
+        <label>Password:</label>
+        <input type="password" name="password" required/>
+
+        <label>Role:</label>
+        <select name="roleName" required>
+            <option value="USER">User</option>
+            <option value="SELLER">Seller</option>
+        </select>
+
+        <button type="submit">Signup</button>
+    </form>
+</div>
+
+</body>
+</html>
